@@ -4,7 +4,7 @@
  * Write a function that takes two words as an argument 
  * and returns true if they are anagrams 
  * (contain the exact same letters) and false otherwise.
- * case insensitive version
+ * (without using count_chars())
  */
 
 function anagram(string $first, string $second) : bool
@@ -13,20 +13,17 @@ function anagram(string $first, string $second) : bool
         return false;
     }
 
-    if(sortString(strtolower($first)) === sortString(strtolower($second))) {
-        return true;
-    }
-
-    return false;
+    return sortString(strtolower($first)) == sortString(strtolower($second));
 }
 
-function sortString(string $input) : string
+function sortString($string)  : string 
 {
-    $stringParts = str_split($input);
+    $stringParts = str_split($string);
     sort($stringParts);
     return implode('', $stringParts);
 }
 
-var_dump(anagram('abc', 'cab')); // true
-var_dump(anagram('abc', 'BAC')); // true
-var_dump(anagram('abc', 'abcc')); // false
+var_dump(anagram('abc', 'cab'));
+var_dump(anagram('abc', 'abcc'));
+var_dump(anagram('aBc', 'Cab'));
+var_dump(anagram('abcde', 'efABC'));
